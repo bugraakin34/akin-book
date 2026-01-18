@@ -1,4 +1,5 @@
-﻿using AkinBook.Infrastructure.Persistence;
+﻿using AkinBook.Infrastructure.Auth;
+using AkinBook.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,10 @@ public static class DependencyInjection
     {
         services.AddDbContext<AppDbContext>(opt =>
             opt.UseNpgsql(config.GetConnectionString("DefaultConnection")));
+
+        services.AddSingleton<IPasswordHasher, PasswordHasher>();
+
+        services.AddSingleton<ITokenService, TokenService>();
 
         return services;
     }

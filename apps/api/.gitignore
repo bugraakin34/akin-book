@@ -1,4 +1,4 @@
-## .NET build çýktýlarý
+## .NET build ï¿½ï¿½ktï¿½larï¿½
 bin/
 obj/
 
@@ -20,7 +20,7 @@ Thumbs.db
 ## Logs
 *.log
 
-## Test sonuçlarý
+## Test sonuï¿½larï¿½
 TestResults/
 
 ## Publish
@@ -34,3 +34,6 @@ publish/
 ## Environment / Secrets
 appsettings.Development.json
 appsettings.Local.json
+
+NUL
+**/NUL

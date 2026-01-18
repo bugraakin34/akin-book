@@ -1,7 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.OpenApi" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AkinBook.Domain\AkinBook.Domain.csproj" />
+    <ProjectReference Include="..\AkinBook.Infrastructure\AkinBook.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

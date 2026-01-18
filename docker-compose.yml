@@ -1,0 +1,57 @@
+services:
+  db:
+    image: postgres:16
+    container_name: akinbook-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: akinbook
+      POSTGRES_USER: akinbook
+      POSTGRES_PASSWORD: akinbook
+    ports:
+      - "5432:5432"
+    volumes:
+      - akinbook_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U akinbook -d akinbook"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: akinbook-api
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+
+      # DbContext buradan okuyacak
+      ConnectionStrings__DefaultConnection: Host=db;Port=5432;Database=akinbook;Username=akinbook;Password=akinbook
+
+      # JWT ayarları
+      Jwt__Issuer: "akinbook"
+      Jwt__Audience: "akinbook"
+      Jwt__Key: "DEV_ONLY_CHANGE_ME_DEV_ONLY_CHANGE_ME_123456"
+    ports:
+      - "5000:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: akinbook-web
+    restart: unless-stopped
+    environment:
+      # Vite build sırasında gömülür
+      VITE_API_BASE_URL: "http://localhost:5000"
+    ports:
+      - "5173:80"
+    depends_on:
+      - api
+
+volumes:
+  akinbook_db:
