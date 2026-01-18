@@ -22,6 +22,12 @@ namespace AkinBook.Infrastructure.Persistence
             modelBuilder.Entity<Book>()
                 .HasIndex(x => x.Isbn)
                 .IsUnique();
+
+            modelBuilder.Entity<Book>()
+                .HasOne(x => x.User)
+                .WithMany()
+                .HasForeignKey(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
     }
