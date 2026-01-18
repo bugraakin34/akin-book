@@ -3,6 +3,7 @@ using AkinBook.Application;
 using AkinBook.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,9 @@ builder.Services
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
+            RoleClaimType = ClaimTypes.Role,
+            NameClaimType = ClaimTypes.NameIdentifier,
+
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateIssuerSigningKey = true,
