@@ -1,4 +1,5 @@
 ﻿using AkinBook.Application.Books.Dtos;
+using AkinBook.Application.Common;
 using AkinBook.Domain.Entities;
 using AkinBook.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
@@ -20,23 +21,58 @@ namespace AkinBook.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<BookResponse>>> GetAll()
+        public async Task<ActionResult<List<BookResponse>>> GetAll(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string? search = null
+            )
         {
-            var items = await _db.Books
+            if(page < 1) page = 1;
+            if (pageSize < 1) pageSize = 10;
+            if(pageSize > 50) pageSize = 50;
+
+            var query = _db.Books.AsNoTracking().AsQueryable();
+
+            if(!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.Trim();
+
+                query = query.Where(x =>
+                    EF.Functions.ILike(x.Title, $"%{search}%") ||
+                    EF.Functions.ILike(x.Author, $"%{search}%")
+                );
+            }
+
+            var TotalCount = await query.CountAsync();
+
+            var items = await query
                 .OrderByDescending(x => x.CreatedAt)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .Select(x => new BookResponse
                 {
                     Id = x.Id,
                     Title = x.Title,
                     Author = x.Author,
                     Description = x.Description,
+                    Isbn = x.Isbn,
+                    CoverUrl = x.CoverUrl,
                     PublishedYear = x.PublishedYear,
                     UserId = x.UserId,
-                    CreatedAt = x.CreatedAt
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt
                 })
                 .ToListAsync();
 
-            return Ok(items);
+            var response = new PagedResponse<BookResponse>
+            {
+                Items = items,
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = TotalCount
+            };
+
+            return Ok(response);
         }
 
         [Authorize(Roles = "Admin")]
