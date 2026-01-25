@@ -3,10 +3,14 @@ using AkinBook.Api.Middlewares;
 using AkinBook.Application;
 using AkinBook.Application.Books.Validators;
 using AkinBook.Infrastructure;
+using AkinBook.Infrastructure.Auth;
+using AkinBook.Infrastructure.Persistence;
+using AkinBook.Infrastructure.Seed;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
@@ -68,6 +72,17 @@ builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateBookRequestValidator>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var sp = scope.ServiceProvider;
+    var db = sp.GetRequiredService<AppDbContext>();
+    var config = sp.GetRequiredService<IConfiguration>();
+    var hasher = sp.GetRequiredService<IPasswordHasher>();
+
+    await db.Database.MigrateAsync();
+    await AppSeed.SeedAsync(db, config, hasher);
+}
 
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthentication();
