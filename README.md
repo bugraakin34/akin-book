@@ -1,30 +1,70 @@
-# AkinBook 📚
+# 📚 AkinBook
 
-AkinBook is a bookstore-style REST API built with **.NET (ASP.NET Core)** and **PostgreSQL**, with a **React** frontend planned.
-This project focuses on clean, real-world backend features: **JWT authentication**, **role-based authorization**, **pagination/search**, **validation**, and **standardized error responses**.
+AkinBook is a full-stack bookstore-style application built with **.NET (ASP.NET Core)** and **PostgreSQL**, featuring a **React frontend**.
 
-## Tech Stack
-- ASP.NET Core Web API (.NET 10)
-- Entity Framework Core + PostgreSQL (Npgsql)
-- JWT Authentication
-- FluentValidation
-- Docker + Docker Compose
-
-## Features
-- ✅ Auth: Register / Login (JWT)
-- ✅ Protected endpoint: `/api/auth/me`
-- ✅ Role-based authorization (Admin-only book create/update/delete)
-- ✅ Books CRUD (Admin manages books)
-- ✅ List books with **pagination + search**
-- ✅ FluentValidation for book create/update
-- ✅ Standard error response format (validation + exceptions)
+This project focuses on real-world backend practices such as **JWT authentication**, **role-based authorization**, **pagination**, **search**, **validation**, and **multi-language (i18n) support**.
 
 ---
 
-## Getting Started
+## 🚀 Tech Stack
 
-### 1) Run with Docker
-From repository root:
+### Backend
+- ASP.NET Core Web API (.NET 10)
+- Entity Framework Core
+- PostgreSQL (Npgsql)
+- JWT Authentication
+- FluentValidation
+
+### Frontend
+- React + TypeScript
+- Ant Design
+- i18next (multi-language support)
+
+### DevOps
+- Docker + Docker Compose
+
+---
+
+## ✨ Features
+
+### 🔐 Authentication & Authorization
+- Register / Login with JWT
+- Protected endpoint: `/api/auth/me`
+- Role-based authorization (Admin / User)
+
+### 📚 Books Management
+- Full CRUD (Admin only for create/update/delete)
+- Pagination & search support
+- Multi-language fields:
+  - Title (TR / EN)
+  - Description (TR / EN)
+
+### 🌍 Internationalization (i18n)
+- UI language switching (TR / EN)
+- Dynamic content rendering based on selected language
+
+### ⚙️ System Features
+- FluentValidation for input validation
+- Standardized error response format
+- Axios interceptor for automatic logout on token expiration
+
+---
+
+## 🐳 Getting Started
+
+### 🔧 Requirements
+
+Make sure you have installed:
+
+- Docker
+- Docker Compose
+- Node.js (v18+)
+- .NET SDK (10)
+
+---
+
+### 1️⃣ Clone the repository
 
 ```bash
-docker compose up --build -d
+git clone https://github.com/your-username/akin-book.git
+cd akin-book
