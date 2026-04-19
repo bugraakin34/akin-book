@@ -1,16 +1,31 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from "react-router-dom";
+import { getAccessToken } from "./utils/storage";
+import LoginPage from "./pages/LoginPage";
+import BooksPage from "./pages/BooksPage";
 
-function App() {
-  return(
-    <Routes>
-      <Route path='/' element={<div>Home (Book list)</div>}/>
-      <Route path='/login' element={<div>Login</div>}/>
-      <Route path='/register' element={<div>Register</div>}/>
-      <Route path='/books/:id' element={<div>Book detail</div>}/>
-      <Route path='/favorites' element={<div>Favorites</div>}/>
-      <Route path='/admin/books' element={<div>Admin Books</div>}/>
-    </Routes>
-  )
+function PrivateRoute({ children }: { children: React.ReactNode }) {
+  const token = getAccessToken();
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <>{children}</>;
 }
 
-export default App
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/books"
+        element={
+          <PrivateRoute>
+            <BooksPage />
+          </PrivateRoute>
+        }
+      />
+      <Route path="*" element={<Navigate to="/books" replace />} />
+    </Routes>
+  );
+}

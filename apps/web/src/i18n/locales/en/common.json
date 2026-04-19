@@ -1,0 +1,31 @@
+{
+  "app": {
+    "title": "Akin Book"
+  },
+  "auth": {
+    "loginTitle": "Akin Book Login",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "loginSuccess": "Login successful",
+    "loginError": "Login failed",
+    "sessionExpired" : "Your session has expired. Please login again."
+  },
+  "books": {
+    "title": "Books",
+    "searchPlaceholder": "Search...",
+    "bookTitle": "Title",
+    "author": "Author",
+    "description" : "Description",
+    "year": "Year",
+    "actions": "Actions",
+    "delete": "Delete",
+    "deleteSuccess": "Book deleted",
+    "deleteError": "Delete failed",
+    "loadError": "Failed to load data"
+  },
+  "language": {
+    "turkish": "Turkish",
+    "english": "English"
+  }
+}

@@ -38,7 +38,8 @@ namespace AkinBook.Api.Controllers
                 search = search.Trim();
 
                 query = query.Where(x =>
-                    EF.Functions.ILike(x.Title, $"%{search}%") ||
+                    EF.Functions.ILike(x.TitleTr, $"%{search}%") ||
+                    EF.Functions.ILike(x.TitleEn, $"%{search}%") ||
                     EF.Functions.ILike(x.Author, $"%{search}%")
                 );
             }
@@ -52,9 +53,11 @@ namespace AkinBook.Api.Controllers
                 .Select(x => new BookResponse
                 {
                     Id = x.Id,
-                    Title = x.Title,
+                    TitleTr = x.TitleTr,
+                    TitleEn = x.TitleEn,
                     Author = x.Author,
-                    Description = x.Description,
+                    DescriptionTr = x.DescriptionTr,
+                    DescriptionEn = x.DescriptionEn,
                     Isbn = x.Isbn,
                     CoverUrl = x.CoverUrl,
                     PublishedYear = x.PublishedYear,
@@ -86,9 +89,13 @@ namespace AkinBook.Api.Controllers
             var book = new Book
             {
                 Id = Guid.NewGuid(),
-                Title = request.Title.Trim(),
+                TitleTr = request.TitleTr.Trim(),
+                TitleEn = request.TitleEn.Trim(),
                 Author = request.Author.Trim(),
-                Description = request.Description?.Trim(),
+                DescriptionTr = request.DescriptionTr?.Trim(),
+                DescriptionEn = request.DescriptionEn?.Trim(),
+                Isbn = request.Isbn?.Trim(),
+                CoverUrl = request.CoverUrl?.Trim(),
                 PublishedYear = request.PublishedYear,
                 UserId = userId,
                 CreatedAt = DateTime.UtcNow
@@ -100,9 +107,11 @@ namespace AkinBook.Api.Controllers
             var response = new BookResponse
             {
                 Id = book.Id,
-                Title = book.Title,
+                TitleTr = book.TitleTr,
+                TitleEn = book.TitleEn,
                 Author = book.Author,
-                Description = book.Description,
+                DescriptionTr = book.DescriptionTr,
+                DescriptionEn = book.DescriptionEn,
                 PublishedYear = book.PublishedYear,
                 UserId = book.UserId,
                 CreatedAt = book.CreatedAt
@@ -119,9 +128,11 @@ namespace AkinBook.Api.Controllers
                 .Select(x => new BookResponse
                 {
                     Id = x.Id,
-                    Title = x.Title,
+                    TitleTr = x.TitleTr,
+                    TitleEn = x.TitleEn,
                     Author = x.Author,
-                    Description = x.Description,
+                    DescriptionTr = x.DescriptionTr,
+                    DescriptionEn = x.DescriptionEn,
                     Isbn = x.Isbn,
                     CoverUrl = x.CoverUrl,
                     PublishedYear = x.PublishedYear,
@@ -151,9 +162,11 @@ namespace AkinBook.Api.Controllers
             if (book.UserId != userId)
                 return Forbid();
 
-            book.Title = request.Title.Trim();
+            book.TitleTr = request.TitleTr.Trim();
+            book.TitleEn = request.TitleEn.Trim();
             book.Author = request.Author.Trim();
-            book.Description = request.Description?.Trim();
+            book.DescriptionTr = request.DescriptionTr?.Trim();
+            book.DescriptionEn = request.DescriptionEn?.Trim();
             book.Isbn = request.Isbn?.Trim();
             book.CoverUrl = request.CoverUrl?.Trim();
             book.PublishedYear = request.PublishedYear;
@@ -164,9 +177,11 @@ namespace AkinBook.Api.Controllers
             var response = new BookResponse
             {
                 Id = book.Id,
-                Title = book.Title,
+                TitleTr = book.TitleTr,
+                TitleEn = book.TitleEn,
                 Author = book.Author,
-                Description = book.Description,
+                DescriptionTr = book.DescriptionTr,
+                DescriptionEn = book.DescriptionEn,
                 Isbn = book.Isbn,
                 CoverUrl = book.CoverUrl,
                 PublishedYear = book.PublishedYear,

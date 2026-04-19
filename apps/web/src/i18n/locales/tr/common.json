@@ -1,0 +1,31 @@
+{
+  "app": {
+    "title": "Akin Book"
+  },
+  "auth": {
+    "loginTitle": "Akin Book Giriş",
+    "email": "E-posta",
+    "password": "Şifre",
+    "login": "Giriş Yap",
+    "loginSuccess": "Giriş başarılı",
+    "loginError": "Giriş başarısız",
+    "sessionExpired" : "Oturum süresi doldu, lütfen tekrar giriş yapın."
+  },
+  "books": {
+    "title": "Kitaplar",
+    "searchPlaceholder": "Ara...",
+    "bookTitle": "Başlık",
+    "author": "Yazar",
+    "description" : "Açıklama",
+    "year": "Yıl",
+    "actions": "İşlemler",
+    "delete": "Sil",
+    "deleteSuccess": "Kitap silindi",
+    "deleteError": "Silme başarısız",
+    "loadError": "Veriler alınamadı"
+  },
+  "language": {
+    "turkish": "Türkçe",
+    "english": "İngilizce"
+  }
+}

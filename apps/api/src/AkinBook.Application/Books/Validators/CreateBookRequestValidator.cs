@@ -10,8 +10,12 @@ namespace AkinBook.Application.Books.Validators
     {
         public CreateBookRequestValidator()
         {
-            RuleFor(x => x.Title)
-                .NotEmpty().WithMessage("Title is required.")
+            RuleFor(x => x.TitleTr)
+                .NotEmpty().WithMessage("Turkish title is required.")
+                .MaximumLength(200);
+
+            RuleFor(x => x.TitleEn)
+                .NotEmpty().WithMessage("English title is required.")
                 .MaximumLength(200);
 
             RuleFor(x => x.Author)

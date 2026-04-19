@@ -8,11 +8,12 @@ namespace AkinBook.Domain.Entities
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        public string Title { get; set; } = default!;
+        public string TitleTr { get; set; } = default!;
+        public string TitleEn { get; set; } = default!;
         public string Author { get; set; } = default!;
-
         public string? Isbn { get; set; }
-        public string? Description { get; set; }
+        public string? DescriptionTr { get; set; }
+        public string? DescriptionEn { get; set; }
         public string? CoverUrl { get; set; }
 
         public int? PublishedYear { get; set; }

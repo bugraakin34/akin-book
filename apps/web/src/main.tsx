@@ -1,16 +1,14 @@
 import React from "react";
-import ReactDom from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
-import { QueryProvider } from "./app/providers/QueryProvider.tsx";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import "antd/dist/reset.css";
+import "./i18n";
+import App from "./App";
 
-ReactDom.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <QueryProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </QueryProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );

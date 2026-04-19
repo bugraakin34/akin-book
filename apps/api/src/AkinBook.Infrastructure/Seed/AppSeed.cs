@@ -55,24 +55,33 @@ namespace AkinBook.Infrastructure.Seed
                     {
                         new Book { 
                             Id = Guid.NewGuid(),
-                            Title = "Suç ve Ceza",
+                            TitleTr = "Suç ve Ceza",
+                            TitleEn = "Crime and Punishment",
                             Author = "Dostoyevski",
+                            DescriptionTr = "Klasik roman",
+                            DescriptionEn = "Classic novel",
                             PublishedYear = 1866,
                             UserId = admin.Id,
                             CreatedAt = DateTime.UtcNow 
                         },
                         new Book { 
                             Id = Guid.NewGuid(),
-                            Title = "Sefiller",
+                            TitleTr = "Sefiller",
+                            TitleEn = "Les Misérables",
                             Author = "Victor Hugo",
+                            DescriptionTr = "Toplumsal adalet ve insanlık üzerine klasik roman.",
+                            DescriptionEn = "A classic novel about justice and humanity.",
                             PublishedYear = 1862,
                             UserId = admin.Id,
                             CreatedAt = DateTime.UtcNow 
                         },
                         new Book {
                             Id = Guid.NewGuid(),
-                            Title = "1984",
+                            TitleTr = "1984",
+                            TitleEn = "1984",
                             Author = "George Orwell",
+                            DescriptionTr = "Distopik bir romandır.",
+                            DescriptionEn = "A dystopian novel.",
                             PublishedYear = 1949,
                             UserId = admin.Id,
                             CreatedAt = DateTime.UtcNow 
